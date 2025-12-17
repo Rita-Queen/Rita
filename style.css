@@ -9,13 +9,11 @@ html, body {
   font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
-  /* 使用您上傳的天竺鼠圖片，並將點擊重心設在 16, 16 */
   cursor: url("cursor-rita.png") 16 16, auto;
   min-height: 100vh;
 }
 
 /* 2. 針對所有可互動元素的鼠標設定 */
-/* 確保滑過連結、按鈕、選單時，依然維持天竺鼠圖案 */
 a, 
 button, 
 summary, 
@@ -32,7 +30,6 @@ details summary {
 }
 
 /* 3. 點擊時的動態回饋 */
-/* 當按下（Active）時，稍微移動點擊重心或縮放元素，讓使用者感覺有按下去 */
 a:active, 
 button:active,
 [role="button"]:active,
@@ -42,13 +39,28 @@ summary:active {
   transition: transform 0.1s ease;
 }
 
-/* 4. 針對特定組件的細節調整 */
-/* 確保下拉選單 (details) 的 summary 標籤也套用鼠標 */
-details summary::-webkit-details-marker {
-  display: none; /* 隱藏預設箭頭以便自定義外觀 */
+/* 4. 進場動畫定義 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* 5. 卷軸美化 (搭配整體溫暖色調) */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* 確保初始狀態隱藏，避免動畫觸發前的閃爍 */
+.opacity-0-initial {
+  opacity: 0;
+}
+
+/* 5. 卷軸美化 */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -65,4 +77,8 @@ details summary::-webkit-details-marker {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #d4b88a;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
 }
