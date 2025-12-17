@@ -3,58 +3,38 @@
   --text-main: #2B2B2B;
 }
 
-/* 1. 全域自定義鼠標設定 */
-html, body {
+/* 1. 全域設定 */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   margin: 0;
   font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
-  /* 設定預設游標為 cursor-rita.png。16 16 是點擊重心（假設圖片是 32x32） */
   cursor: url("cursor-rita.png") 16 16, auto;
-  min-height: 100vh;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
 }
 
-/* 2. 針對所有可互動元素的鼠標設定 */
-a, 
-button, 
-summary, 
-select,
-label,
-input[type="submit"],
-input[type="button"],
-input[type="checkbox"],
-input[type="radio"],
-[role="button"],
-.cursor-pointer,
-details summary {
+/* 2. 互動元素與游標 */
+a, button, summary, select, label, [role="button"], .cursor-pointer, details summary {
   cursor: url("cursor-rita.png") 16 16, pointer !important;
 }
 
-/* 3. 針對文字輸入區域的優化 */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="search"],
-textarea,
-[contenteditable="true"] {
-  cursor: text;
-}
+input[type="text"], input[type="email"], textarea { cursor: text; }
 
-/* 4. 點擊（按下）時的動態回饋 */
-a:active, 
-button:active,
-[role="button"]:active,
-summary:active {
-  cursor: url("cursor-rita.png") 18 18, pointer !important;
-  transform: scale(0.98);
+a:active, button:active {
+  transform: scale(0.97);
   transition: transform 0.1s ease;
 }
 
-/* 5. 進場動畫定義 - 優化為更細微的 10px 位移與硬體加速 */
-@keyframes fadeInUpSubtle {
+/* 3. 進場動畫定義 */
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -62,18 +42,49 @@ summary:active {
   }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUpSubtle 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.reveal-on-scroll {
+  opacity: 0;
   will-change: transform, opacity;
 }
 
-.opacity-0-initial {
-  opacity: 0;
+.reveal-active {
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* 6. 卷軸美化 */
+/* 4. 微互動效果 */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+}
+
+/* 5. 連結底線動畫 */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #b0894f;
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* 6. 捲軸美化 */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -83,13 +94,21 @@ summary:active {
 ::-webkit-scrollbar-thumb {
   background: #e6d3b1;
   border-radius: 10px;
-  border: 2px solid #f6f1ea;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #d4b88a;
 }
 
+/* 7. 其他元件修正 */
 details summary::-webkit-details-marker {
   display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e6d3b1;
+  border-radius: 4px;
 }
