@@ -1,0 +1,21 @@
+:root {
+  --bg-main: #FAF8F4;
+  --text-main: #2B2B2B;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Custom Cursor from original design */
+html, body, * {
+  cursor: url("cursor-rita.png") 16 16, auto !important;
+}
+
+/* Micro interactions for the cursor */
+a:hover, button:hover, summary:hover {
+  cursor: pointer; /* Fallback if image fails */
+}
