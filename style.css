@@ -15,7 +15,6 @@ html, body {
 }
 
 /* 2. 針對所有可互動元素的鼠標設定 */
-/* 包含連結、按鈕、表單標籤、自定義按鈕等，確保滑過時維持自定義游標 */
 a, 
 button, 
 summary, 
@@ -32,7 +31,6 @@ details summary {
 }
 
 /* 3. 針對文字輸入區域的優化 */
-/* 為了不影響打字與選取文字的體驗，這些區域保留系統預設的 I-beam 游標 */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -52,11 +50,11 @@ summary:active {
   transition: transform 0.1s ease;
 }
 
-/* 5. 進場動畫定義 (用於各組件的 fade-in 效果) */
-@keyframes fadeInUp {
+/* 5. 進場動畫定義 - 優化為更細微的 10px 位移與硬體加速 */
+@keyframes fadeInUpSubtle {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -65,7 +63,8 @@ summary:active {
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUpSubtle 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
 }
 
 .opacity-0-initial {
@@ -91,7 +90,6 @@ summary:active {
   background: #d4b88a;
 }
 
-/* 隱藏 details 預設的箭頭 */
 details summary::-webkit-details-marker {
   display: none;
 }

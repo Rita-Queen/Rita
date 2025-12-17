@@ -12,11 +12,14 @@ const Skills: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // 一旦顯示後就不再重複觸發，維持效能
+          // Once visible, stop observing to save resources
           if (sectionRef.current) observer.unobserve(sectionRef.current);
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before it fully enters
+      }
     );
 
     if (sectionRef.current) {
@@ -31,11 +34,12 @@ const Skills: React.FC = () => {
       {content.skills.map((skill, index) => (
         <div 
           key={index} 
-          className={`bg-white p-5 rounded-xl border border-stone-100 shadow-sm flex items-start gap-3 hover:border-amber-200 transition-colors ${
+          className={`bg-white p-5 rounded-xl border border-stone-100 shadow-sm flex items-start gap-3 hover:border-amber-200 transition-all duration-300 hover:shadow-md ${
             isVisible ? 'animate-fade-in-up' : 'opacity-0-initial'
           }`}
           style={{ 
-            animationDelay: isVisible ? `${index * 0.1}s` : '0s'
+            // 0.15s stagger provides a smooth "wave" effect
+            animationDelay: isVisible ? `${index * 0.15}s` : '0s'
           }}
         >
           <CheckCircle2 className="text-amber-600 shrink-0 mt-0.5" size={20} />
