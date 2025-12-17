@@ -3,18 +3,19 @@
   --text-main: #2B2B2B;
 }
 
-/* 1. Global Cursor for the entire application */
+/* 1. 全域自定義鼠標設定 */
 html, body {
   margin: 0;
   font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
-  /* Use the custom guinea pig cursor with a 16,16 hotspot */
+  /* 使用您上傳的天竺鼠圖片，並將點擊重心設在 16, 16 */
   cursor: url("cursor-rita.png") 16 16, auto;
   min-height: 100vh;
 }
 
-/* 2. Cursor for all interactive elements */
+/* 2. 針對所有可互動元素的鼠標設定 */
+/* 確保滑過連結、按鈕、選單時，依然維持天竺鼠圖案 */
 a, 
 button, 
 summary, 
@@ -25,29 +26,29 @@ input[type="button"],
 input[type="checkbox"],
 input[type="radio"],
 [role="button"],
-.cursor-pointer {
-  /* Maintain the custom cursor but indicate it's a clickable area */
-  cursor: url("cursor-rita.png") 16 16, pointer;
+.cursor-pointer,
+details summary {
+  cursor: url("cursor-rita.png") 16 16, pointer !important;
 }
 
-/* 3. Distinct Active State */
-/* When clicking, we shift the hotspot slightly to simulate a "pressing" action 
-   and add a visual scale effect to the element for a premium feel. */
+/* 3. 點擊時的動態回饋 */
+/* 當按下（Active）時，稍微移動點擊重心或縮放元素，讓使用者感覺有按下去 */
 a:active, 
 button:active,
 [role="button"]:active,
 summary:active {
-  cursor: url("cursor-rita.png") 18 18, pointer;
-  transform: scale(0.96);
+  cursor: url("cursor-rita.png") 18 18, pointer !important;
+  transform: scale(0.97);
   transition: transform 0.1s ease;
 }
 
-/* Ensure child elements don't override the cursor unexpectedly */
-* {
-  /* Inherit the custom cursor unless specified */
+/* 4. 針對特定組件的細節調整 */
+/* 確保下拉選單 (details) 的 summary 標籤也套用鼠標 */
+details summary::-webkit-details-marker {
+  display: none; /* 隱藏預設箭頭以便自定義外觀 */
 }
 
-/* Scrollbar styling - customized to match the warm stone/amber palette */
+/* 5. 卷軸美化 (搭配整體溫暖色調) */
 ::-webkit-scrollbar {
   width: 10px;
 }
