@@ -20,9 +20,5 @@ export interface CertificateItem {
 export interface CertificateCategory {
   id: string;
   title: string;
-  subtitle: string;
-  type: 'course' | 'cert';
   items: CertificateItem[];
 }
-
-export type FilterType = 'all' | 'course' | 'cert';

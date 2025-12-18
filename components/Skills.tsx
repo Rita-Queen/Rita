@@ -1,49 +1,50 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { ClipboardCheck, Layers, Sparkles, Database, Users, Layout, FileText } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import Bilingual from './Bilingual';
+
+const skillIcons = [
+  <Layout size={20} />,
+  <Users size={20} />,
+  <Sparkles size={20} />,
+  <FileText size={20} />,
+  <Database size={20} />,
+  <Layers size={20} />,
+  <ClipboardCheck size={20} />
+];
 
 const Skills: React.FC = () => {
-  const { content } = useLanguage();
+  const { zh, en } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Once visible, stop observing to save resources
-          if (sectionRef.current) observer.unobserve(sectionRef.current);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
-      { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px' // Trigger slightly before it fully enters
-      }
+      { threshold: 0.1 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={sectionRef} className="grid md:grid-cols-2 gap-4">
-      {content.skills.map((skill, index) => (
+    <div ref={sectionRef} className="grid sm:grid-cols-2 gap-4">
+      {zh.skills.map((skill, index) => (
         <div 
           key={index} 
-          className={`bg-white p-5 rounded-xl border border-stone-100 shadow-sm flex items-start gap-3 hover:border-amber-200 transition-all duration-300 hover:shadow-md ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0-initial'
+          className={`bg-white p-6 rounded-2xl border border-stone-100 shadow-sm flex items-start gap-5 card-hover transition-all duration-500 ${
+            isVisible ? 'animate-reveal' : 'opacity-0'
           }`}
-          style={{ 
-            // 0.15s stagger provides a smooth "wave" effect
-            animationDelay: isVisible ? `${index * 0.15}s` : '0s'
-          }}
+          style={{ animationDelay: `${index * 80}ms` }}
         >
-          <CheckCircle2 className="text-amber-600 shrink-0 mt-0.5" size={20} />
-          <span className="text-stone-700 font-medium">{skill}</span>
+          <div className="text-amber-600 shrink-0 p-3 bg-stone-50 rounded-xl">
+            {skillIcons[index] || <ClipboardCheck size={20} />}
+          </div>
+          <div className="text-stone-700 font-bold text-sm md:text-base self-center">
+            <Bilingual zh={skill} en={en.skills[index]} />
+          </div>
         </div>
       ))}
     </div>

@@ -8,10 +8,11 @@ import Projects from './components/Projects';
 import Certifications from './components/Certifications';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import Bilingual from './components/Bilingual';
 import { useLanguage } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
-  const { content } = useLanguage();
+  const { zh, en } = useLanguage();
 
   return (
     <div className="min-h-screen bg-[#faf8f4] text-stone-800 selection:bg-amber-200 selection:text-amber-900">
@@ -20,36 +21,57 @@ const App: React.FC = () => {
       <main>
         <Hero />
         
-        <Section id="about" title={content.section_titles.about} subtitle={content.section_titles.about_sub}>
-          <div className="text-lg text-stone-600 space-y-4 leading-relaxed bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
-            {content.about_text.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+        <Section id="about" titleKey="about">
+          <div className="grid md:grid-cols-5 gap-12 items-center">
+            <div className="md:col-span-3 space-y-8 text-lg text-stone-600 leading-relaxed bg-white p-10 rounded-[2.5rem] shadow-sm border border-stone-100 card-hover">
+              {zh.about_text.map((paragraph, index) => (
+                <Bilingual key={index} zh={paragraph} en={en.about_text[index]} />
+              ))}
+            </div>
+            <div className="md:col-span-2 flex justify-center">
+               <div className="w-full aspect-square bg-stone-100 rounded-[3rem] flex items-center justify-center p-8 border border-stone-200 shadow-inner">
+                  <div className="text-center space-y-4">
+                    <div className="text-6xl text-amber-600/30 font-black">10+</div>
+                    <div className="text-stone-400 font-bold uppercase tracking-[0.2em] text-[10px]">
+                      <Bilingual zh="行政歷練" en="Years Admin Experience" />
+                    </div>
+                  </div>
+               </div>
+            </div>
           </div>
         </Section>
 
-        <Section id="skills" title={content.section_titles.skills} subtitle={content.section_titles.skills_sub}>
+        <Section id="skills" titleKey="skills">
           <Skills />
         </Section>
 
-        <Section id="experience" title={content.section_titles.experience} subtitle={content.section_titles.experience_sub}>
+        <Section id="experience" titleKey="experience">
           <Experience />
         </Section>
 
-        <Section id="projects" title={content.section_titles.projects} subtitle={content.section_titles.projects_sub}>
+        <Section id="projects" titleKey="projects">
           <Projects />
         </Section>
 
-        <Section id="education" title={content.section_titles.education} subtitle={content.section_titles.education_sub}>
+        <Section id="education" titleKey="education">
           <Certifications />
         </Section>
 
-        <Section id="traits" title={content.section_titles.traits} subtitle={content.section_titles.traits_sub}>
-           <div className="bg-amber-700 text-white p-8 rounded-3xl shadow-lg relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
-             <p className="text-lg md:text-xl font-medium leading-relaxed relative z-10 text-center md:text-left">
-              "{content.traits_quote}"
-             </p>
+        <Section id="traits" titleKey="traits">
+           <div className="grid md:grid-cols-2 gap-6">
+              {zh.traits_points.map((point, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 card-hover flex gap-6 items-start"
+                >
+                  <div className="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 font-bold text-xs shadow-sm">
+                    0{index + 1}
+                  </div>
+                  <div className="text-stone-600 font-medium leading-relaxed">
+                    <Bilingual zh={point} en={en.traits_points[index]} />
+                  </div>
+                </div>
+              ))}
            </div>
         </Section>
       </main>

@@ -1,15 +1,18 @@
 import React, { createContext, useContext, useState } from 'react';
 import { CONTENT } from '../constants';
 
-type Language = 'zh' | 'en';
+export type Language = 'zh' | 'en' | 'both';
 
 // Helper type to extract the structure of the content
 type ContentType = typeof CONTENT.zh;
 
 interface LanguageContextType {
   language: Language;
+  setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
   content: ContentType;
+  zh: ContentType;
+  en: ContentType;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -19,15 +22,26 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const toggleLanguage = () => {
     setLanguage(prev => {
-      const newLang = prev === 'zh' ? 'en' : 'zh';
-      // Optional: Update HTML lang attribute
-      document.documentElement.lang = newLang === 'zh' ? 'zh-Hant' : 'en';
-      return newLang;
+      let next: Language;
+      if (prev === 'zh') next = 'en';
+      else if (prev === 'en') next = 'both';
+      else next = 'zh';
+
+      // Update HTML lang attribute for accessibility
+      document.documentElement.lang = next === 'en' ? 'en' : 'zh-Hant';
+      return next;
     });
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, content: CONTENT[language] }}>
+    <LanguageContext.Provider value={{ 
+      language, 
+      setLanguage,
+      toggleLanguage, 
+      content: language === 'en' ? CONTENT.en : CONTENT.zh,
+      zh: CONTENT.zh,
+      en: CONTENT.en
+    }}>
       {children}
     </LanguageContext.Provider>
   );

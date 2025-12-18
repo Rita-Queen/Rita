@@ -1,9 +1,13 @@
+
 :root {
   --bg-main: #FAF8F4;
   --text-main: #2B2B2B;
+  --accent: #b0894f;
+  --stone-100: #f6f1ea;
+  --stone-200: #e6d3b1;
 }
 
-/* 1. 全域設定 */
+/* 1. 全域排版 - 強調空氣感 */
 html {
   scroll-behavior: smooth;
 }
@@ -13,28 +17,31 @@ body {
   font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
-  cursor: url("cursor-rita.png") 16 16, auto;
-  line-height: 1.6;
-  letter-spacing: 0.02em;
+  line-height: 1.85; 
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 2. 互動元素與游標 */
-a, button, summary, select, label, [role="button"], .cursor-pointer, details summary {
-  cursor: url("cursor-rita.png") 16 16, pointer !important;
+/* 2. 標題字體對比 */
+h1, h2, h3, h4 {
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-input[type="text"], input[type="email"], textarea { cursor: text; }
-
-a:active, button:active {
-  transform: scale(0.97);
-  transition: transform 0.1s ease;
+h1, h3 {
+  font-weight: 700;
 }
 
-/* 3. 進場動畫定義 */
-@keyframes fadeInUp {
+/* 3. 互動元素 */
+a, button, summary, [role="button"], .cursor-pointer {
+  cursor: pointer;
+}
+
+/* 4. 進場動畫 */
+@keyframes fadeInUpFast {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -42,73 +49,100 @@ a:active, button:active {
   }
 }
 
-.reveal-on-scroll {
-  opacity: 0;
-  will-change: transform, opacity;
+/* 語言切換專用動畫 - 極短淡入以確保流暢感 */
+@keyframes langFadeIn {
+  from { opacity: 0.7; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-lang-change {
+  animation: langFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-reveal {
+  animation: fadeInUpFast 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .reveal-active {
-  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: fadeInUpFast 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* 4. 微互動效果 */
+/* 5. 微互動與卡片設計 */
+.card-hover {
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid rgba(230, 211, 177, 0.2);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.005);
+  background-color: #ffffff;
+  box-shadow: 0 30px 60px -12px rgba(90, 67, 37, 0.12);
+  border-color: var(--accent);
+}
+
 .hover-lift {
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
 }
 
-/* 5. 連結底線動畫 */
-.link-underline {
+/* 6. 連結底線動畫 */
+.link-hover {
   position: relative;
   text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
 }
 
-.link-underline::after {
+.link-hover::after {
   content: '';
   position: absolute;
   width: 0;
-  height: 2px;
+  height: 1.5px;
   bottom: -2px;
   left: 0;
-  background-color: #b0894f;
-  transition: width 0.3s ease;
+  background-color: var(--accent);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.link-underline:hover::after {
+.link-hover:hover {
+  color: var(--accent);
+}
+
+.link-hover:hover::after {
   width: 100%;
 }
 
-/* 6. 捲軸美化 */
+/* 7. 捲軸美化 */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f6f1ea;
+  background: var(--stone-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e6d3b1;
+  background: var(--stone-200);
   border-radius: 10px;
+  border: 2px solid var(--stone-100);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4b88a;
+  background: var(--accent);
 }
 
-/* 7. 其他元件修正 */
+/* 8. 導覽列模糊效果 */
+.nav-blur {
+  background-color: rgba(250, 248, 244, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* 9. 移除系統箭頭 */
 details summary::-webkit-details-marker {
   display: none;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #e6d3b1;
-  border-radius: 4px;
 }
