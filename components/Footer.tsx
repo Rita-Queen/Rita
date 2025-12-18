@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Mail, Phone, Linkedin, Building2, ExternalLink, Check, Copy } from 'lucide-react';
+import { Mail, Phone, Linkedin, Building2, ExternalLink, Copy } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import Bilingual from './Bilingual';
 
 const Footer: React.FC = () => {
-  const { zh, en } = useLanguage();
+  const { zh, en, language } = useLanguage();
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const handleCopy = (email: string, id: string) => {
@@ -16,6 +16,12 @@ const Footer: React.FC = () => {
 
   return (
     <footer id="contact" className="bg-stone-900 text-stone-300 py-20 px-6 scroll-mt-24">
+      <div className="max-w-4xl mx-auto mb-16">
+        <div className="text-stone-400 italic text-lg border-l-2 border-amber-600/30 pl-6 py-2">
+          <Bilingual zh={zh.footer.intro} en={en.footer.intro} />
+        </div>
+      </div>
+
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-16">
         
         <div>

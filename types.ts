@@ -2,7 +2,13 @@ export interface ExperienceItem {
   company: string;
   role: string;
   period: string;
+  summary: string;
   details: string[];
+}
+
+export interface AboutSection {
+  title: string;
+  content: string;
 }
 
 export interface ProjectItem {

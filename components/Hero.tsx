@@ -16,63 +16,62 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <header className="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
-      <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
-        
-        {/* Photo Column */}
-        <div className="order-1 md:order-2 flex justify-center md:justify-end">
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] animate-reveal">
-            <div className="absolute inset-0 bg-amber-200/20 rounded-[4rem] rotate-3 blur-3xl transform"></div>
-            <img 
-              src="https://acade.must.edu.tw/files/generated-image_20251117164949_160.png" 
-              alt="Rita Zhong" 
-              className="relative w-full h-full object-cover rounded-[4rem] border-[12px] border-white shadow-2xl z-10"
-            />
+    <header className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-24 px-6 text-center overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-amber-50/20 blur-[120px] rounded-full"></div>
+      </div>
+
+      <div className="relative z-10 max-w-4xl w-full flex flex-col items-center">
+        {/* Profile Image with subtle reveal */}
+        <div className="mb-12 animate-reveal">
+           <div className="relative w-48 h-48 md:w-60 md:h-60">
+              <div className="absolute inset-0 bg-amber-600/10 rounded-[3rem] rotate-6"></div>
+              <img 
+                src="https://acade.must.edu.tw/files/generated-image_20251117164949_160.png" 
+                alt="Rita Zhong" 
+                className="relative w-full h-full object-cover rounded-[3rem] border-8 border-white shadow-xl z-10"
+              />
+           </div>
+        </div>
+
+        {/* Hero Text with restricted width for focus */}
+        <div className="max-w-[640px] space-y-8 animate-reveal" style={{ animationDelay: '0.2s' }}>
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight leading-tight">
+              <Bilingual zh={zh.hero.role} en={en.hero.role} inline />
+            </h1>
+          </div>
+
+          <div className="text-xl md:text-2xl text-stone-600 leading-relaxed font-medium italic">
+            <Bilingual zh={zh.hero.tagline} en={en.hero.tagline} />
+          </div>
+
+          <div className="text-stone-400 text-xs font-black tracking-[0.3em] uppercase bg-stone-100 px-6 py-2 rounded-full inline-block">
+             <Bilingual zh={zh.hero.target} en={en.hero.target} />
           </div>
         </div>
 
-        {/* Content Column */}
-        <div className="order-2 md:order-1 text-center md:text-left space-y-10 animate-reveal" style={{ animationDelay: '0.2s' }}>
-          <div className="space-y-4">
-            <h1 className="text-stone-900 font-bold tracking-tight">
-              <span className="block text-2xl md:text-3xl text-stone-400 mb-2 font-medium">Hello, I'm</span>
-              <span className="block text-5xl md:text-6xl lg:text-7xl">鍾旻庭 Rita</span>
-            </h1>
-            <h2 className="text-xl md:text-2xl font-bold text-amber-600 tracking-wide uppercase">
-              <Bilingual zh={zh.hero.role} en={en.hero.role} />
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            <div className="text-stone-600 text-lg md:text-xl leading-relaxed max-w-lg mx-auto md:mx-0 font-medium italic">
-              <Bilingual zh={zh.hero.tagline} en={en.hero.tagline} />
-            </div>
-            <div className="text-stone-400 text-xs font-bold tracking-widest uppercase border-l-2 border-stone-200 pl-4 py-1">
-              <Bilingual zh={zh.hero.target} en={en.hero.target} />
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start pt-4">
-            <a 
-              href="#experience" 
-              onClick={(e) => handleCtaClick(e, '#experience')}
-              className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-stone-900 text-white rounded-full font-bold hover:bg-amber-800 transition-all duration-300 shadow-xl hover:-translate-y-1"
-            >
-              {language === 'en' ? en.hero.btn_exp : zh.hero.btn_exp} 
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-            <a 
-              href="#projects" 
-              onClick={(e) => handleCtaClick(e, '#projects')}
-              className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-stone-800 border-2 border-stone-100 rounded-full font-bold hover:border-amber-600 hover:text-amber-800 transition-all duration-300"
-            >
-              {language === 'en' ? en.hero.btn_proj : zh.hero.btn_proj}
-            </a>
-          </div>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-5 mt-14 animate-reveal" style={{ animationDelay: '0.4s' }}>
+          <a 
+            href="#about" 
+            onClick={(e) => handleCtaClick(e, '#about')}
+            className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-stone-900 text-white rounded-full font-bold hover:bg-amber-800 transition-all duration-300 shadow-xl hover:-translate-y-1"
+          >
+            <Bilingual zh={zh.hero.btn_exp} en={en.hero.btn_exp} />
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a 
+            href="#experience" 
+            onClick={(e) => handleCtaClick(e, '#experience')}
+            className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-stone-800 border-2 border-stone-100 rounded-full font-bold hover:border-amber-600 hover:text-amber-800 transition-all duration-300 hover:-translate-y-1 shadow-sm"
+          >
+            <Bilingual zh={zh.hero.btn_proj} en={en.hero.btn_proj} />
+          </a>
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-stone-300 animate-bounce">
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-stone-300 animate-bounce">
         <span className="text-[10px] uppercase tracking-[0.5em] font-black">Scroll</span>
         <ChevronDown size={20} />
       </div>

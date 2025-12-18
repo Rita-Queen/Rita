@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -13,7 +12,6 @@ interface BilingualProps {
 const Bilingual: React.FC<BilingualProps> = ({ zh, en, className = '', vertical = true, inline = false }) => {
   const { language } = useLanguage();
 
-  // 使用 key 觸發 CSS 動畫，確保切換時有平滑感
   const renderContent = () => {
     if (language === 'zh') {
       return <span>{zh}</span>;
@@ -22,21 +20,21 @@ const Bilingual: React.FC<BilingualProps> = ({ zh, en, className = '', vertical 
       return <span>{en}</span>;
     }
 
-    // Both 模式
+    // Both mode
     if (inline) {
       return (
-        <span className="flex items-center">
+        <span className="flex flex-wrap items-center">
           <span>{zh}</span>
-          <span className="mx-2 text-stone-300 opacity-50">|</span>
-          <span className="opacity-60 font-normal">{en}</span>
+          <span className="mx-2 text-stone-300 opacity-50 font-light">|</span>
+          <span className="font-medium text-stone-500">{en}</span>
         </span>
       );
     }
 
     return (
-      <span className={`${vertical ? 'flex flex-col gap-1' : 'flex flex-wrap items-baseline gap-x-3 gap-y-1'}`}>
-        <span className="block text-stone-800">{zh}</span>
-        <span className="block text-[0.82em] leading-relaxed text-stone-500 font-normal italic border-l-2 border-stone-100 pl-3">
+      <span className={`${vertical ? 'flex flex-col gap-1.5' : 'flex flex-wrap items-baseline gap-x-3 gap-y-1'}`}>
+        <span className="block text-stone-800 font-semibold">{zh}</span>
+        <span className="block text-[0.88em] leading-relaxed text-stone-500 font-normal italic border-l-2 border-stone-200 pl-4 py-0.5">
           {en}
         </span>
       </span>
