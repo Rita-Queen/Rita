@@ -72,10 +72,6 @@ const App: React.FC = () => {
           <Projects />
         </Section>
 
-        <Section id="education" titleKey="education">
-          <Certifications />
-        </Section>
-
         <Section id="traits" titleKey="traits">
            <div className="grid md:grid-cols-2 gap-8">
               {zh.traits_points.map((point, index) => (
@@ -92,6 +88,10 @@ const App: React.FC = () => {
                 </div>
               ))}
            </div>
+        </Section>
+
+        <Section id="education" titleKey="education">
+          <Certifications />
         </Section>
       </main>
 

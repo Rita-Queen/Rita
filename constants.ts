@@ -107,6 +107,7 @@ export const CONTENT = {
       skills: '核心能力',
       experience: '工作經歷',
       projects: '專案亮點',
+      traits: '特質與職業目標',
       education: '進修與證照',
       contact: '聯絡方式'
     },
@@ -150,7 +151,7 @@ export const CONTENT = {
       },
       {
         title: "工作風格與核心能力",
-        content: "面對很多零散的任務時，我會先理出步驟，寫成大家都看得懂的 SOP、表單 and 範本。習慣使用雲端試算表、共用文件與簡單自動化工具追蹤進度，減少口頭溝通的誤差，讓團隊可以快速接手。"
+        content: "面對很多零散的任務時，我會先理出步驟，寫成大家都看得懂的 SOP、表單和範本。習慣使用雲端試算表、共用文件與簡單自動化工具追蹤進度，減少口頭溝通的誤差，讓團隊可以快速接手。"
       },
       {
         title: "為什麼走向科技教育行政",
@@ -158,7 +159,7 @@ export const CONTENT = {
       }
     ],
     skills: [
-      { title: "行政流程設計與 SOP 建置", description: "將重複性高的工作整理成標準流程和表單，降低遺漏與人為差錯。" },
+      { title: "行政流程設計與 SOP 建置", description: "將重複性高的工作整理成標準流程 and 表單，降低遺漏與人為差錯。" },
       { title: "專案管理與跨單位協作", description: "能拆解專案時程、追蹤進度，並在教師、行政與外部單位之間協調需求。" },
       { title: "大型測驗與活動規劃（千人規模）", description: "規劃考場、動線與人力分配，確保流程順暢、資訊明確。" },
       { title: "教育部計畫行政（經費與報告）", description: "處理預算編列、核銷文件與成果報告，確保符合規定且通過審查。" },
@@ -236,6 +237,7 @@ export const CONTENT = {
       skills: 'Skills',
       experience: 'Experience',
       projects: 'Projects',
+      traits: 'Traits',
       education: 'Certifications',
       contact: 'Contact'
     },
@@ -252,7 +254,7 @@ export const CONTENT = {
       experience: 'Gained practical experience in higher education admin, MOE projects, and community services from planning to final reporting.',
       projects: 'Solving administrative pain points with workflow design and simple automation tools.',
       education: 'To support administration and projects with stability, I continuously learn through online courses and international certifications. My focus includes PM, Cloud & Data, Design, and Communication, categorized below.',
-      traits: 'Valuing detail and traceability, I strive to be a reliable administrative and project partner that teams can count on.'
+      traits: 'Focusing on detail and traceability, I aim to be a reliable administrative and project partner that teams can rely on.'
     },
     section_titles: {
       about: 'About Me',
@@ -265,7 +267,7 @@ export const CONTENT = {
       projects_sub: 'Highlights',
       education: 'Education',
       education_sub: '84 Professional Certifications',
-      traits: 'Goals',
+      traits: 'Traits & Career Goals',
       traits_sub: 'Professional Philosophy'
     },
     about_sections: [
@@ -345,10 +347,10 @@ export const CONTENT = {
       { id: "others", title: "🛡️ Security & Other Specialist", items: ALL_CERTIFICATES.securityLawOthers }
     ],
     traits_points: [
-      "When managing multiple projects, I document every task in lists and schedules to ensure nothing is missed or delayed.",
-      "I enjoy organizing scattered administrative tasks into SOPs and templates, making it easy for new team members to pick up the workflow.",
-      "When dealing with teachers, students, and supervisors, I actively listen to needs and explain constraints to find feasible compromises.",
-      "I continuously learn PM and automation tools to promote more efficient and user-friendly administrative processes in educational institutions."
+      "In multi-project environments, I document every task in lists and schedules to ensure nothing is missed or delayed.",
+      "I enjoy organizing scattered administrative tasks into SOPs and templates, enabling successors to ramp up quickly.",
+      "When working with faculty, students, and supervisors, I listen actively to needs and clarify constraints to find viable compromises.",
+      "I continuously learn PM and automation tools to drive more efficient and user-friendly administrative workflows in educational settings."
     ],
     footer: {
       contact: 'Contact',
